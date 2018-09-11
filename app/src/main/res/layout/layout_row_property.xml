@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/small_medium_padding">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding"
+        android:text="@string/txt_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/txt_medium" />
+
+    <TextView
+        android:id="@+id/tv_name_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/tv_name"
+        android:layout_toRightOf="@+id/tv_name"
+        android:padding="@dimen/small_padding"
+        android:text="Name: "
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/txt_large"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding"
+        android:text="@string/txt_e_mail"
+        android:layout_below="@id/tv_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/txt_medium" />
+
+    <TextView
+        android:id="@+id/tv_mail_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_mail"
+        android:layout_alignBottom="@+id/tv_mail"
+        android:layout_toEndOf="@+id/tv_name"
+        android:layout_toRightOf="@+id/tv_name"
+        android:padding="@dimen/small_padding"
+        android:text="E-Mail"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/txt_large"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:paddingRight="@dimen/small_padding"/>
+</RelativeLayout>

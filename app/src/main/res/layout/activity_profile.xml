@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.softices.traineeapp.activities.ProfileActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:elevation="0dp">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:elevation="0dp"
+                app:theme="@style/AppThemeNoActionbar" />
+        </android.support.design.widget.AppBarLayout>
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/small_padding"
+            android:text="Profile"
+            android:textColor="@color/myWhite"
+            android:textSize="@dimen/txt_larger"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_medium_padding">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/small_medium_margin"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ic_user" />
+
+        <TextView
+            android:id="@+id/tv_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_photo"
+            android:text="@string/txt_name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_name_label"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/tv_name_label"
+            android:layout_toRightOf="@+id/tv_name_label"
+            android:text="Value" />
+
+        <TextView
+            android:id="@+id/tv_mail_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name_label"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@string/txt_e_mail"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_mail_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_mail_label"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/tv_mail_label"
+            android:layout_toRightOf="@+id/tv_mail_label"
+            android:text="Value" />
+
+        <TextView
+            android:id="@+id/tv_mobile_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_mail_label"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@string/txt_mobile_no"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_mobile_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_mobile_label"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/tv_mobile_label"
+            android:layout_toRightOf="@+id/tv_mobile_label"
+            android:text="Value" />
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_mobile_value"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/txt_update" />
+
+    </RelativeLayout>
+</RelativeLayout>

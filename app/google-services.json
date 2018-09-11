@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "459739051393",
+    "firebase_url": "https://fir-notification-eaf22.firebaseio.com",
+    "project_id": "fir-notification-eaf22",
+    "storage_bucket": "fir-notification-eaf22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459739051393:android:7eefd053f70b4dce",
+        "android_client_info": {
+          "package_name": "com.softices.traineeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459739051393-pmu92devd8rh35pbnkb0qschcncplq4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH-QblrZp7-tCaht0cDGjZDlNI19S2Mlc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

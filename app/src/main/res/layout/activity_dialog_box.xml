@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.softices.traineeapp.activities.DialogBoxActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:elevation="0dp">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:elevation="0dp"
+                app:theme="@style/AppThemeNoActionbar" />
+        </android.support.design.widget.AppBarLayout>
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/small_padding"
+            android:text="Dialogue Box Demo"
+            android:textColor="@color/myWhite"
+            android:textSize="@dimen/txt_larger"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="134dp"
+            android:background="@color/colorPrimary"
+            android:onClick="time"
+            android:padding="@dimen/small_medium_padding"
+            android:text="Select Time:  " />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btn_time"
+            android:layout_alignBottom="@+id/btn_time"
+            android:layout_alignLeft="@+id/tv_date"
+            android:layout_alignStart="@+id/tv_date"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/txt_large"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btn_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btn_time"
+            android:layout_alignRight="@+id/btn_time"
+            android:layout_below="@+id/btn_time"
+            android:layout_marginTop="22dp"
+            android:background="@color/colorPrimary"
+            android:onClick="date"
+            android:padding="@dimen/small_medium_padding"
+            android:text="Select Date: " />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btn_date"
+            android:layout_alignBottom="@+id/btn_date"
+            android:layout_marginLeft="72dp"
+            android:layout_marginStart="72dp"
+            android:layout_toEndOf="@+id/btn_time"
+            android:layout_toRightOf="@+id/btn_time"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/txt_large"
+            android:textStyle="italic" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tv_date"
+            android:layout_alignRight="@+id/tv_date"
+            android:layout_below="@+id/btn_date"
+            android:layout_marginEnd="29dp"
+            android:layout_marginRight="29dp"
+            android:layout_marginTop="48dp"
+            android:background="@color/myWhite"
+            android:padding="@dimen/small_medium_padding"
+            android:text="Show Dialogue Box"
+            android:textColor="@color/colorPrimary"
+            android:onClick="alertDialog"/>
+    </RelativeLayout>
+
+</LinearLayout>

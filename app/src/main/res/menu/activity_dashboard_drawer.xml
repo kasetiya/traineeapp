@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group>
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/ic_all_users"
+            android:title="All Users" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/ic_logout"
+            android:title="Log Out" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_contact_list"
+                android:icon="@drawable/ic_contact_list"
+                android:title="Contact List" />
+            <item
+                android:id="@+id/nav_maps"
+                android:icon="@drawable/ic_map"
+                android:title="G Map" />
+            <item
+                android:id="@+id/nav_web_service"
+                android:icon="@drawable/ic_web_service"
+                android:title="Web Services" />
+            <item
+                android:id="@+id/nav_broadcast"
+                android:icon="@drawable/ic_receiver"
+                android:title="Broadcast Receiver" />
+            <item
+                android:id="@+id/nav_dialog_box"
+                android:icon="@drawable/ic_dialogue_box"
+                android:title="Dialogue Box" />
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>
