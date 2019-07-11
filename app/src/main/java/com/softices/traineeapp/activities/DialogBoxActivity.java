@@ -37,10 +37,8 @@ public class DialogBoxActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-
-        tvTime = (TextView) findViewById(R.id.tv_time);
-        tvDate = (TextView) findViewById(R.id.tv_date);
-
+        tvTime = findViewById(R.id.tv_time);
+        tvDate = findViewById(R.id.tv_date);
     }
 
     /** \
@@ -49,24 +47,21 @@ public class DialogBoxActivity extends AppCompatActivity {
      */
     public void alertDialog(View v) {
         final DialogInterface.OnClickListener di;
-        di = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                String a;
-                if (i == dialog.BUTTON_POSITIVE) {
-                    a = tvDate.getText().toString();
-                    if (a.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), getString(R.string.txt_no_date), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), getString(R.string.txt_date_selected), Toast.LENGTH_LONG).show();
-                    }
+        di = (dialog, i) -> {
+            String a;
+            if (i == dialog.BUTTON_POSITIVE) {
+                a = tvDate.getText().toString();
+                if (a.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.txt_no_date), Toast.LENGTH_LONG).show();
                 } else {
-                    a = tvTime.getText().toString();
-                    if (a.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), getString(R.string.txt_no_time), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), getString(R.string.txt_time_selected), Toast.LENGTH_LONG).show();
-                    }
+                    Toast.makeText(getApplicationContext(), getString(R.string.txt_date_selected), Toast.LENGTH_LONG).show();
+                }
+            } else {
+                a = tvTime.getText().toString();
+                if (a.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.txt_no_time), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), getString(R.string.txt_time_selected), Toast.LENGTH_LONG).show();
                 }
             }
         };
@@ -86,12 +81,9 @@ public class DialogBoxActivity extends AppCompatActivity {
      */
     public void date(View v) {
         DatePickerDialog.OnDateSetListener dpd_l;
-        dpd_l = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                int Month = month + 1;
-                tvDate.setText(dayOfMonth + "/" + Month + "/" + year);
-            }
+        dpd_l = (view, year, month, dayOfMonth) -> {
+            int Month = month + 1;
+            tvDate.setText(dayOfMonth + "/" + Month + "/" + year);
         };
         DatePickerDialog dpd;
         dpd = new DatePickerDialog(this, dpd_l, 2018, 2, 1);
@@ -104,23 +96,19 @@ public class DialogBoxActivity extends AppCompatActivity {
      */
     public void time(View v) {
         TimePickerDialog.OnTimeSetListener tpd_l;
-        tpd_l = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int h, int m) {
-                String a = "";
-                if (h >= 12) {
-                    a = "PM";
-                    h = h - 12;
-                } else {
-                    a = "AM";
-                }
-                tvTime.setText(h + ":" + m + " " + a);
+        tpd_l = (view, h, m) -> {
+            String a = "";
+            if (h >= 12) {
+                a = "PM";
+                h = h - 12;
+            } else {
+                a = "AM";
             }
+            tvTime.setText(h + ":" + m + " " + a);
         };
         TimePickerDialog tpd;
         tpd = new TimePickerDialog(this, tpd_l, 17, 54, false);
         tpd.show();
-
     }
 
     /** \

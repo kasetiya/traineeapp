@@ -42,7 +42,6 @@ import java.io.IOException;
 
 public class EditProfileActivity extends AppCompatActivity {
     private EditText edtFirstName, edtLastName, edtEmail, edtMobile;
-    private TextView tvChangePass;
     private ImageView ivPhoto;
     private Button btnChange;
     private Uri selectedImage;
@@ -71,28 +70,16 @@ public class EditProfileActivity extends AppCompatActivity {
         dbManager = new DatabaseManager(this);
         userModel = new UserModel();
         currentmail = AppPref.getUserEmail(this);
-
-        edtFirstName = (EditText) findViewById(R.id.edt_first_name);
-        edtLastName = (EditText) findViewById(R.id.edt_last_name);
-        edtEmail = (EditText) findViewById(R.id.edt_email);
-        edtMobile = (EditText) findViewById(R.id.edt_mobile);
-        ivPhoto = (ImageView) findViewById(R.id.iv_photo);
-        ivPhoto.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onOpenImage();
-            }
-        });
-        btnChange = (Button) findViewById(R.id.btn_change);
-        btnChange.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSaveChange();
-            }
-        });
+        edtFirstName = findViewById(R.id.edt_first_name);
+        edtLastName = findViewById(R.id.edt_last_name);
+        edtEmail = findViewById(R.id.edt_email);
+        edtMobile = findViewById(R.id.edt_mobile);
+        ivPhoto = findViewById(R.id.iv_photo);
+        ivPhoto.setOnClickListener(view -> onOpenImage());
+        btnChange = findViewById(R.id.btn_change);
+        btnChange.setOnClickListener(view -> onSaveChange());
 
         setDefaultData();
-
     }
 
     /**
@@ -175,26 +162,23 @@ public class EditProfileActivity extends AppCompatActivity {
         final CharSequence[] options = {"Take Photo", "Choose From Gallery", "Cancel"};
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle("Select Option");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    dialog.dismiss();
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    selectedImage = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-                            "image_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
-                    intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, selectedImage);
-                    startActivityForResult(intent, PICK_IMAGE_CAMERA);
-                } else if (options[item].equals("Choose From Gallery")) {
-                    dialog.dismiss();
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    pickPhoto.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(pickPhoto, "Compelete action using"),
-                            PICK_IMAGE_GALLERY);
-                } else if (options[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Take Photo")) {
+                dialog.dismiss();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                selectedImage = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                        "image_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, selectedImage);
+                startActivityForResult(intent, PICK_IMAGE_CAMERA);
+            } else if (options[item].equals("Choose From Gallery")) {
+                dialog.dismiss();
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickPhoto.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(pickPhoto, "Compelete action using"),
+                        PICK_IMAGE_GALLERY);
+            } else if (options[item].equals("Cancel")) {
+                dialog.dismiss();
             }
         });
         builder.show();

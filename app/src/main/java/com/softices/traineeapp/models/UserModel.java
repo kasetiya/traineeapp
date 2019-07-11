@@ -8,14 +8,6 @@ public class UserModel implements Serializable {
     private String firstName, lastName, email, mobile, password;
     private Bitmap photo;
 
-    public UserModel(String firstName, String lastName, String email, String mobile, String password, Bitmap photo) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.mobile = mobile;
-        this.password = password;
-        this.photo = photo;
-    }
     public UserModel() {
     }
 

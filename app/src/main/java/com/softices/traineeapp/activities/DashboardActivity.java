@@ -36,43 +36,40 @@ public class DashboardActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         dbManager = new DatabaseManager(this);
         model = new UserModel();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         String currentMail = AppPref.getUserEmail(DashboardActivity.this);
-        tvWelcome = (TextView) findViewById(R.id.tv_welcome);
+        tvWelcome = findViewById(R.id.tv_welcome);
         model = dbManager.getUserDataByEmail(currentMail);
         tvWelcome.setText("Welcome " + model.getFirstName());
 
         // fetching & displaying as profile name.
         View view = navigationView.getHeaderView(0);
-        tvProfileName = (TextView) view.findViewById(R.id.tv_name);
+        tvProfileName = view.findViewById(R.id.tv_name);
 
         view = navigationView.getHeaderView(0);
-        tvDetail = (TextView) view.findViewById(R.id.tv_detail);
-        tvDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(intent);
-            }
+        tvDetail = view.findViewById(R.id.tv_detail);
+        tvDetail.setOnClickListener(v -> {
+            intent = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(intent);
         });
 
         // fetching & displaying as profile image.
         view = navigationView.getHeaderView(0);
-        ivProfile = (ImageView) view.findViewById(R.id.imageView);
+        ivProfile = view.findViewById(R.id.imageView);
     }
 
     private void setDefaultData() {
@@ -90,7 +87,7 @@ public class DashboardActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -158,7 +155,7 @@ public class DashboardActivity extends AppCompatActivity implements
             intent = new Intent(DashboardActivity.this, DialogBoxActivity.class);
             startActivity(intent);
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

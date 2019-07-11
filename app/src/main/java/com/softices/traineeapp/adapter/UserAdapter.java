@@ -54,13 +54,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         } else {
             holder.tvName.setText(model.getFirstName());
             holder.tvMail.setText(model.getEmail());
-            holder.ivDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dbManager.deleteUser(model.getEmail());
-                    userModelList.remove(position);
-                    notifyDataSetChanged();
-                }
+            holder.ivDelete.setOnClickListener(view -> {
+                dbManager.deleteUser(model.getEmail());
+                userModelList.remove(position);
+                notifyDataSetChanged();
             });
         }
     }
@@ -79,10 +76,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             super(view);
 
             dbManager = new DatabaseManager(context);
-            tvMail = (TextView) view.findViewById(R.id.tv_mail_value);
-            tvName = (TextView) view.findViewById(R.id.tv_name_value);
-            ivDelete = (ImageView) view.findViewById(R.id.iv_delete);
-            cardView = (CardView) view.findViewById(R.id.card_view);
+            tvMail = view.findViewById(R.id.tv_mail_value);
+            tvName = view.findViewById(R.id.tv_name_value);
+            ivDelete = view.findViewById(R.id.iv_delete);
+            cardView = view.findViewById(R.id.card_view);
         }
     }
 }

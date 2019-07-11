@@ -65,14 +65,13 @@ public class SignupActivity extends AppCompatActivity {
 
         dbManager = new DatabaseManager(this);
 
-        edtFirstName = (EditText) findViewById(R.id.edt_first_name);
-        edtLastName = (EditText) findViewById(R.id.edt_last_name);
-        edtEmail = (EditText) findViewById(R.id.edt_email);
-        edtMobile = (EditText) findViewById(R.id.edt_mobile);
-        edtPassword = (EditText) findViewById(R.id.edt_password);
-        edtConPassword = (EditText) findViewById(R.id.edt_conf_password);
-        ivPhoto = (ImageView) findViewById(R.id.iv_photo);
-
+        edtFirstName = findViewById(R.id.edt_first_name);
+        edtLastName = findViewById(R.id.edt_last_name);
+        edtEmail = findViewById(R.id.edt_email);
+        edtMobile = findViewById(R.id.edt_mobile);
+        edtPassword = findViewById(R.id.edt_password);
+        edtConPassword = findViewById(R.id.edt_conf_password);
+        ivPhoto = findViewById(R.id.iv_photo);
         edtFirstName.setText("Softices");
         edtLastName.setText("softices");
         edtEmail.setText("softices@gmail.com");
@@ -136,26 +135,23 @@ public class SignupActivity extends AppCompatActivity {
         final CharSequence[] options = {"Take Photo", "Choose From Gallery", "Cancel"};
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(SignupActivity.this);
         builder.setTitle("Select Option");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    dialog.dismiss();
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    selectedImage = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-                            "image_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
-                    intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, selectedImage);
-                    startActivityForResult(intent, PICK_IMAGE_CAMERA);
-                } else if (options[item].equals("Choose From Gallery")) {
-                    dialog.dismiss();
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    pickPhoto.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(pickPhoto, "Compelete action using"),
-                            PICK_IMAGE_GALLERY);
-                } else if (options[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Take Photo")) {
+                dialog.dismiss();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                selectedImage = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                        "image_" + System.currentTimeMillis() + ".jpg"));
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, selectedImage);
+                startActivityForResult(intent, PICK_IMAGE_CAMERA);
+            } else if (options[item].equals("Choose From Gallery")) {
+                dialog.dismiss();
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickPhoto.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(pickPhoto, "Compelete action using"),
+                        PICK_IMAGE_GALLERY);
+            } else if (options[item].equals("Cancel")) {
+                dialog.dismiss();
             }
         });
         builder.show();
@@ -254,13 +250,11 @@ public class SignupActivity extends AppCompatActivity {
                 userModel.setMobile(mMobile);
                 userModel.setPassword(mPassword);
                 userModel.setPhoto(photoBitmap);
-
                 dbManager.insertIntoTableUser(userModel);
                 Toast.makeText(this, getString(R.string.txt_success_sign_up), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
                 startActivity(intent);
                 finish();
-
             }
         } catch (Exception e) {
             Log.e(TAG, "onClickDoSignup" + e);

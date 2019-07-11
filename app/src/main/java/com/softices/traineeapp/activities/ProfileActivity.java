@@ -44,20 +44,17 @@ public class ProfileActivity extends AppCompatActivity {
         dbManager = new DatabaseManager(this);
         userModel = new UserModel();
 
-        tvMail = (TextView) findViewById(R.id.tv_mail_value);
-        tvName = (TextView) findViewById(R.id.tv_name_value);
-        tvMobile = (TextView) findViewById(R.id.tv_mobile_value);
-        ivPhoto = (ImageView) findViewById(R.id.iv_photo);
+        tvMail = findViewById(R.id.tv_mail_value);
+        tvName = findViewById(R.id.tv_name_value);
+        tvMobile = findViewById(R.id.tv_mobile_value);
+        ivPhoto = findViewById(R.id.iv_photo);
 
 
-        btnUpdate = (Button) findViewById(R.id.btn_update);
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        btnUpdate = findViewById(R.id.btn_update);
+        btnUpdate.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         setDefaultData();

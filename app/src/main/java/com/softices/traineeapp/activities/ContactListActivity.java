@@ -28,7 +28,6 @@ public class ContactListActivity extends AppCompatActivity {
     private ArrayList<String> Number_ArrayList = new ArrayList<String>();
     private String TAG = "ContactListActivity";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +40,13 @@ public class ContactListActivity extends AppCompatActivity {
      * Initializing all views.
      */
     private void init() {
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-
-        listview = (ListView) findViewById(R.id.list_contact);
+        listview = findViewById(R.id.list_contact);
         checkPermission();
-
     }
 
     /**
@@ -72,7 +68,6 @@ public class ContactListActivity extends AppCompatActivity {
                                 Manifest.permission.WRITE_CONTACTS}, REQUEST_CODE);
             }
         }
-
     }
 
     /** \

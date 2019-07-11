@@ -38,8 +38,8 @@ public class BroadcastReceiverActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
 
-        tvReceiveStatus = (TextView) findViewById(R.id.tv_receive_status);
-        tvReceive = (TextView) findViewById(R.id.tv_receive);
+        tvReceiveStatus = findViewById(R.id.tv_receive_status);
+        tvReceive = findViewById(R.id.tv_receive);
         broadcastAction();
     }
 
@@ -50,7 +50,6 @@ public class BroadcastReceiverActivity extends AppCompatActivity {
     private void broadcastAction() {
         IntentFilter filter;
         filter = new IntentFilter();
-
         filter.addAction(Intent.ACTION_POWER_CONNECTED);
         filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
         registerReceiver(myReceiver, filter);

@@ -13,9 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.softices.traineeapp.R;
@@ -59,30 +57,30 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
 
         session = new SessionManager(this);
-        btnGet = (Button) findViewById(R.id.btn_get);
+        btnGet = findViewById(R.id.btn_get);
         btnGet.setOnClickListener(this);
-        btnPost = (Button) findViewById(R.id.btn_post);
+        btnPost = findViewById(R.id.btn_post);
         btnPost.setOnClickListener(this);
-        btnPatch = (Button) findViewById(R.id.btn_patch);
+        btnPatch = findViewById(R.id.btn_patch);
         btnPatch.setOnClickListener(this);
-        btnDelete = (Button) findViewById(R.id.btn_delete);
+        btnDelete = findViewById(R.id.btn_delete);
         btnDelete.setOnClickListener(this);
-        tvResponse = (TextView) findViewById(R.id.tv_response);
+        tvResponse = findViewById(R.id.tv_response);
 
-        postLayout = (LinearLayout) findViewById(R.id.post_layout);
-        edtMail = (EditText) findViewById(R.id.edt_post_mail);
-        edtPass = (EditText) findViewById(R.id.edt_post_pass);
-        btnPostService = (Button) findViewById(R.id.btn_post_service);
+        postLayout = findViewById(R.id.post_layout);
+        edtMail = findViewById(R.id.edt_post_mail);
+        edtPass = findViewById(R.id.edt_post_pass);
+        btnPostService = findViewById(R.id.btn_post_service);
         btnPostService.setOnClickListener(this);
 
-        patchLayout = (LinearLayout) findViewById(R.id.patch_layout);
-        edtComment = (EditText) findViewById(R.id.edt_patch);
-        btnPatchService = (Button) findViewById(R.id.btn_patch_service);
+        patchLayout = findViewById(R.id.patch_layout);
+        edtComment = findViewById(R.id.edt_patch);
+        btnPatchService = findViewById(R.id.btn_patch_service);
         btnPatchService.setOnClickListener(this);
 
-        deleteLayout = (LinearLayout) findViewById(R.id.delete_layout);
-        tvDelete = (TextView) findViewById(R.id.tv_delete);
-        btnDeleteService = (Button) findViewById(R.id.btn_delete_request);
+        deleteLayout = findViewById(R.id.delete_layout);
+        tvDelete = findViewById(R.id.tv_delete);
+        btnDeleteService = findViewById(R.id.btn_delete_request);
         btnDeleteService.setOnClickListener(this);
     }
 
@@ -156,27 +154,19 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
 
         JsonObjectRequest deleteReq = new JsonObjectRequest(Request.Method.DELETE,
                 url, null,
-                new com.android.volley.Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e(TAG, response.toString());
-                        try {
-                            String data = response.getString(JsonKeys.jsData);
-                            Log.e("onResponse: in try", data);
-                        } catch (JSONException e) {
-                            Log.e("in catch", e.toString());
-                        }
-                        Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
+                response -> {
+                    Log.e(TAG, response.toString());
+                    try {
+                        String data = response.getString(JsonKeys.jsData);
+                        Log.e("onResponse: in try", data);
+                    } catch (JSONException e) {
+                        Log.e("in catch", e.toString());
                     }
+                    Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
                 },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.e(TAG, "Error: " + error.getMessage());
-                    }
-                }) {
+                error -> VolleyLog.e(TAG, "Error: " + error.getMessage())) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 String token = session.getToken();
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(JsonKeys.jsAccessToken, token);
@@ -212,28 +202,20 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
 
         JsonObjectRequest patchReq = new JsonObjectRequest(Request.Method.PATCH,
                 url, jsonComment,
-                new com.android.volley.Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e(TAG, response.toString());
-                        try {
-                            String data = response.getString(JsonKeys.jsData);
-                            Log.e("onResponse: in try", data);
-                        } catch (JSONException e) {
-                            Log.e("in catch", e.toString());
-                        }
-                        Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
+                response -> {
+                    Log.e(TAG, response.toString());
+                    try {
+                        String data = response.getString(JsonKeys.jsData);
+                        Log.e("onResponse: in try", data);
+                    } catch (JSONException e) {
+                        Log.e("in catch", e.toString());
                     }
+                    Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
                 },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.e(TAG, "Error: " + error.getMessage());
-                    }
-                }
+                error -> VolleyLog.e(TAG, "Error: " + error.getMessage())
         ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 String token = session.getToken();
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(JsonKeys.jsAccessToken, token);
@@ -272,31 +254,23 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST,
                 urlSignIn, jsonObj,
-                new com.android.volley.Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e(TAG, response.toString());
-                        try {
-                            JSONObject data = response.getJSONObject(JsonKeys.jsData);
-                            String token = data.getString(JsonKeys.jsToken);
-                            String id = data.getString(JsonKeys.jsId);
-                            session.createIdSession(id, true);
-                            session.createTokenSession(token, true);
-                            tvResponse.setText("TOKEN: " + token);
-                            Log.e("in try", token);
+                response -> {
+                    Log.e(TAG, response.toString());
+                    try {
+                        JSONObject data = response.getJSONObject(JsonKeys.jsData);
+                        String token = data.getString(JsonKeys.jsToken);
+                        String id = data.getString(JsonKeys.jsId);
+                        session.createIdSession(id, true);
+                        session.createTokenSession(token, true);
+                        tvResponse.setText("TOKEN: " + token);
+                        Log.e("in try", token);
 
-                        } catch (JSONException e) {
-                            Log.e("in catch", e.toString());
-                        }
-                        Toast.makeText(getApplicationContext(), "Response: "
-                                + response.toString(), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        Log.e("in catch", e.toString());
                     }
-                }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e(TAG, "Error: " + error.getMessage());
-            }
-        }) {
+                    Toast.makeText(getApplicationContext(), "Response: "
+                            + response.toString(), Toast.LENGTH_SHORT).show();
+                }, error -> VolleyLog.e(TAG, "Error: " + error.getMessage())) {
 
             @Override
             protected Map<String, String> getParams() {
@@ -317,39 +291,33 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
     private void GetResponse() {
         String urlJsonObj = "https://api.androidhive.info/volley/person_object.json";
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, urlJsonObj, null,
-                new com.android.volley.Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e(TAG, response.toString());
-                        try {
-                            String name = response.getString(JsonKeys.jsName);
-                            String mail = response.getString(JsonKeys.jsMail);
-                            JSONObject phone = response.getJSONObject(JsonKeys.jsPhone);
-                            String home = phone.getString(JsonKeys.jsHome);
-                            String mobile = phone.getString(JsonKeys.jsMobile);
+                response -> {
+                    Log.e(TAG, response.toString());
+                    try {
+                        String name = response.getString(JsonKeys.jsName);
+                        String mail = response.getString(JsonKeys.jsMail);
+                        JSONObject phone = response.getJSONObject(JsonKeys.jsPhone);
+                        String home = phone.getString(JsonKeys.jsHome);
+                        String mobile = phone.getString(JsonKeys.jsMobile);
 
-                            jsonResponse = "";
-                            jsonResponse += "Name: " + name + "\n";
-                            jsonResponse += "E-mail: " + mail + "\n";
-                            jsonResponse += "Phone: \n";
-                            jsonResponse += "   Home: " + home + "\n";
-                            jsonResponse += "   Mobile: " + mobile + "\n";
-                            tvResponse.setText(jsonResponse);
+                        jsonResponse = "";
+                        jsonResponse += "Name: " + name + "\n";
+                        jsonResponse += "E-mail: " + mail + "\n";
+                        jsonResponse += "Phone: \n";
+                        jsonResponse += "   Home: " + home + "\n";
+                        jsonResponse += "   Mobile: " + mobile + "\n";
+                        tvResponse.setText(jsonResponse);
 
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(),
-                                    "Error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(),
+                                "Error: " + e.getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
-                }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                }, error -> {
+                    VolleyLog.e(TAG, "Error: " + error.getMessage());
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_SHORT).show();
+                });
         MyApplication.getsInstance().add(req);
     }
 

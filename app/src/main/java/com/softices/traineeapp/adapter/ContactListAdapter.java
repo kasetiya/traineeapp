@@ -19,7 +19,6 @@ public class ContactListAdapter extends BaseAdapter {
     ArrayList<String> userName;
     ArrayList<String> userNumber;
     Context context;
-    ArrayList<String> tempData;
 
     public ContactListAdapter(Context c2, ArrayList<String> name, ArrayList<String> number) {
         this.context = c2;
@@ -50,8 +49,8 @@ public class ContactListAdapter extends BaseAdapter {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             child = layoutInflater.inflate(R.layout.listview_layout, null);
             holder = new Holder();
-            holder.txtListName = (TextView) child.findViewById(R.id.tv_contact_name);
-            holder.txtListNumber = (TextView) child.findViewById(R.id.tv_contact_no);
+            holder.txtListName = child.findViewById(R.id.tv_contact_name);
+            holder.txtListNumber = child.findViewById(R.id.tv_contact_no);
             child.setTag(holder);
         } else {
             holder = (Holder) child.getTag();

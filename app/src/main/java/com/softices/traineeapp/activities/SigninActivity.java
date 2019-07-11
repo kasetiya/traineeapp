@@ -44,15 +44,15 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
 
         dbManager = new DatabaseManager(this);
 
-        edtEmail = (EditText) findViewById(R.id.edt_email);
+        edtEmail = findViewById(R.id.edt_email);
         edtPassword = (EditText) findViewById(R.id.edt_password);
         edtEmail.setText("softices@gmail.com");
         edtPassword.setText("12345678");
 
-        tvSignup = (TextView) findViewById(R.id.tv_link_signup);
+        tvSignup = findViewById(R.id.tv_link_signup);
         tvSignup.setOnClickListener(this);
 
-        btnLogin = (Button) findViewById(R.id.btn_login);
+        btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(this);
     }
 

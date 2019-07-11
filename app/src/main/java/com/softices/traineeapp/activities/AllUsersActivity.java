@@ -1,6 +1,5 @@
 package com.softices.traineeapp.activities;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -25,9 +24,6 @@ public class AllUsersActivity extends AppCompatActivity {
     private ArrayList<UserModel> userModelList;
     private UserAdapter adapter;
     private DatabaseManager dbManager;
-    private SQLiteDatabase dbObject;
-    private DatabaseHelper dbHelper;
-    private UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +44,19 @@ public class AllUsersActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
 
         dbManager = new DatabaseManager(this);
-        userModel = new UserModel();
-        dbHelper = new DatabaseHelper(this);
-        dbObject = dbHelper.getWritableDatabase();
 
         userModelList = new ArrayList<>();
 
-        recyclerUsers = (RecyclerView) findViewById(R.id.recycler_users);
+        recyclerUsers = findViewById(R.id.recycler_users);
         recyclerUsers.setLayoutManager(new LinearLayoutManager(AllUsersActivity.this,
                 LinearLayoutManager.VERTICAL, false));
         recyclerUsers.setNestedScrollingEnabled(false);
         recyclerUsers.setHasFixedSize(true);
-
-
         adapter = new UserAdapter(userModelList, this);
         recyclerUsers.setAdapter(adapter);
         recyclerUsers.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL ));
-        showUsers();
 
+        showUsers();
     }
 
     /**
