@@ -12,22 +12,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.softices.traineeapp.R;
@@ -77,14 +76,6 @@ public class EditProfileActivity extends AppCompatActivity {
         edtLastName = (EditText) findViewById(R.id.edt_last_name);
         edtEmail = (EditText) findViewById(R.id.edt_email);
         edtMobile = (EditText) findViewById(R.id.edt_mobile);
-        tvChangePass = (TextView) findViewById(R.id.tv_change);
-        tvChangePass.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EditProfileActivity.this, ChangePasswordActivity.class);
-                startActivity(intent);
-            }
-        });
         ivPhoto = (ImageView) findViewById(R.id.iv_photo);
         ivPhoto.setOnClickListener(new OnClickListener() {
             @Override
@@ -254,7 +245,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                 Glide.with(this)
                         .load(out.toByteArray())
-                        .asBitmap()
                         .into(ivPhoto);
             } else {
                 L.t(this, "Unable to select image");
@@ -274,11 +264,11 @@ public class EditProfileActivity extends AppCompatActivity {
         String mMobile = edtMobile.getText().toString();
         Bitmap imageBtimap = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
         try {
-            if (!L.isValidName(mFirstName)) {
+            if (L.validName(mFirstName)) {
                 Toast.makeText(this, getString(R.string.txt_enter_first_name), Toast.LENGTH_SHORT).show();
-            } else if (!L.isValidName(mLastName)) {
+            } else if (L.validName(mLastName)) {
                 Toast.makeText(this, getString(R.string.txt_enter_last_name), Toast.LENGTH_SHORT).show();
-            } else if (!L.isValidMobile(mMobile)) {
+            } else if (L.validMobile(mMobile)) {
                 Toast.makeText(this, getString(R.string.txt_enter_valid_number), Toast.LENGTH_SHORT).show();
             } else {
                 userModel.setFirstName(mFirstName);

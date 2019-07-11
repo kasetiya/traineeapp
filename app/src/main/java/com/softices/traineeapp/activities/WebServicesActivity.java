@@ -1,9 +1,6 @@
 package com.softices.traineeapp.activities;
 
-import android.app.DownloadManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,12 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.common.api.Response;
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.application.MyApplication;
 import com.softices.traineeapp.constants.JsonKeys;
@@ -38,7 +37,8 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
     private EditText edtMail, edtPass, edtComment;
     private LinearLayout postLayout, patchLayout, deleteLayout;
     private SessionManager session;
-    private String TAG = "WebServicesActivity", jsonResponse, tagJsonObj = "json_obj_req";;
+    private String TAG = "WebServicesActivity", jsonResponse, tagJsonObj = "json_obj_req";
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,26 +68,28 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         btnDelete = (Button) findViewById(R.id.btn_delete);
         btnDelete.setOnClickListener(this);
         tvResponse = (TextView) findViewById(R.id.tv_response);
-        
+
         postLayout = (LinearLayout) findViewById(R.id.post_layout);
         edtMail = (EditText) findViewById(R.id.edt_post_mail);
         edtPass = (EditText) findViewById(R.id.edt_post_pass);
         btnPostService = (Button) findViewById(R.id.btn_post_service);
         btnPostService.setOnClickListener(this);
-        
+
         patchLayout = (LinearLayout) findViewById(R.id.patch_layout);
         edtComment = (EditText) findViewById(R.id.edt_patch);
         btnPatchService = (Button) findViewById(R.id.btn_patch_service);
         btnPatchService.setOnClickListener(this);
-        
+
         deleteLayout = (LinearLayout) findViewById(R.id.delete_layout);
         tvDelete = (TextView) findViewById(R.id.tv_delete);
         btnDeleteService = (Button) findViewById(R.id.btn_delete_request);
         btnDeleteService.setOnClickListener(this);
     }
 
-    /** \
+    /**
+     * \
      * Invokes when any view is clicked.
+     *
      * @param view
      */
     @Override
@@ -144,7 +146,8 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    /** \
+    /**
+     * \
      * This method is for DeleteService.
      */
     private void DeleteRequest() {
@@ -184,7 +187,8 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    /** \
+    /**
+     * \
      * This method is for PatchService.
      */
     private void PatchRequest() {
@@ -240,7 +244,8 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    /** \
+    /**
+     * \
      * This method is for PostService.
      */
     private void PostService() {
@@ -305,7 +310,8 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         MyApplication.getsInstance().add(req, tagJsonObj);
     }
 
-    /** \
+    /**
+     * \
      * This method is for GetService.
      */
     private void GetResponse() {
@@ -347,8 +353,10 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         MyApplication.getsInstance().add(req);
     }
 
-    /** \
+    /**
+     * \
      * This method functions when clicked on toolbar items
+     *
      * @param item
      * @return
      */
@@ -358,6 +366,7 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
             case android.R.id.home:
                 finish();
                 break;
-        }return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

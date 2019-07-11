@@ -12,17 +12,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.softices.traineeapp.R;
@@ -162,6 +163,7 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
         if (resultCode != RESULT_OK) return;
         switch (requestCode) {
             case PICK_IMAGE_CAMERA:
@@ -200,7 +202,6 @@ public class SignupActivity extends AppCompatActivity {
                 Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                 Glide.with(this)
                         .load(out.toByteArray())
-                        .asBitmap()
                         .into(ivPhoto);
             } else {
                 L.t(this, "Unable to select image");
@@ -224,22 +225,22 @@ public class SignupActivity extends AppCompatActivity {
         String mConPassword = edtConPassword.getText().toString();
         photoBitmap = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
         try {
-            if (!L.isValidName(mFirstName)) {
+            if (L.validName(mFirstName)) {
                 Toast.makeText(this, getString(R.string.txt_enter_first_name), Toast.LENGTH_SHORT).show();
                 edtFirstName.setFocusable(true);
-            } else if (!L.isValidName(mLastName)) {
+            } else if (L.validName(mLastName)) {
                 Toast.makeText(this, getString(R.string.txt_enter_last_name), Toast.LENGTH_SHORT).show();
                 edtLastName.setFocusable(true);
-            } else if (!L.isValidEmail(mEmail)) {
+            } else if (L.validEmail(mEmail)) {
                 Toast.makeText(this, getString(R.string.txt_enter_valid_mail), Toast.LENGTH_SHORT).show();
                 edtEmail.setFocusable(true);
-            } else if (!L.isValidMobile(mMobile)) {
+            } else if (L.validMobile(mMobile)) {
                 Toast.makeText(this, getString(R.string.txt_enter_valid_number), Toast.LENGTH_SHORT).show();
                 edtMobile.setFocusable(true);
-            } else if (!L.isValidPassword(mPassword)) {
+            } else if (L.validPassword(mPassword)) {
                 Toast.makeText(this, getString(R.string.txt_valid_password), Toast.LENGTH_SHORT).show();
                 edtPassword.setFocusable(true);
-            } else if (!L.isValidPassword(mConPassword)) {
+            } else if (L.validPassword(mConPassword)) {
                 Toast.makeText(this, getString(R.string.txt_valid_password), Toast.LENGTH_SHORT).show();
                 edtConPassword.setFocusable(true);
             } else if (!L.isPasswordMatch(mPassword, mConPassword)) {

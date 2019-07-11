@@ -1,16 +1,16 @@
 package com.softices.traineeapp.activities;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.database.DatabaseManager;
@@ -20,7 +20,7 @@ import com.softices.traineeapp.sharedPreferences.AppPref;
 public class SigninActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
-    private TextView tvSignup, tvForgotPassword;
+    private TextView tvSignup;
     private Intent i;
     private DatabaseManager dbManager;
 
@@ -54,15 +54,6 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
 
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(this);
-
-        tvForgotPassword = (TextView) findViewById(R.id.tv_forgot_password);
-        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SigninActivity.this, ForgotPasswordActivity.class));
-                finish();
-            }
-        });
     }
 
     @Override
@@ -79,16 +70,17 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    /** \
+    /**
+     * \
      * Successfully log in user after checking
      * all validation.
      */
     private void doSIgnIn() {
         String password = edtPassword.getText().toString();
         String email = edtEmail.getText().toString();
-        if (!L.isValidEmail(email)) {
+        if (L.validEmail(email)) {
             Toast.makeText(this, getString(R.string.txt_enter_valid_mail), Toast.LENGTH_SHORT).show();
-        } else if (!L.isValidPassword(password)) {
+        } else if (L.validPassword(password)) {
             Toast.makeText(this, getString(R.string.txt_valid_password), Toast.LENGTH_SHORT).show();
         } else {
             Boolean valid = dbManager.isValidLogin(email, password);

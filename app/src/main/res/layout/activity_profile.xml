@@ -10,20 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.AppBarLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:elevation="0dp">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:elevation="0dp"
-                app:theme="@style/AppThemeNoActionbar" />
-        </android.support.design.widget.AppBarLayout>
+            android:background="@color/colorPrimary"
+            android:elevation="0dp"
+            app:theme="@style/AppThemeNoActionbar" />
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -47,8 +40,8 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/small_medium_margin"
             android:layout_marginTop="70dp"
+            android:layout_marginBottom="@dimen/small_medium_margin"
             android:src="@drawable/ic_user" />
 
         <TextView
@@ -64,8 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tv_name_label"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
             android:layout_toEndOf="@+id/tv_name_label"
             android:layout_toRightOf="@+id/tv_name_label"
             android:text="Value" />
@@ -84,8 +77,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tv_mail_label"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
             android:layout_toEndOf="@+id/tv_mail_label"
             android:layout_toRightOf="@+id/tv_mail_label"
             android:text="Value" />
@@ -104,8 +97,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tv_mobile_label"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
             android:layout_toEndOf="@+id/tv_mobile_label"
             android:layout_toRightOf="@+id/tv_mobile_label"
             android:text="Value" />

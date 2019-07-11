@@ -1,8 +1,9 @@
 package com.softices.traineeapp.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.sharedPreferences.AppPref;
