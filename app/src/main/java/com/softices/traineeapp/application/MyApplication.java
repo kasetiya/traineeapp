@@ -17,7 +17,7 @@ public class MyApplication extends Application {
     public static MyApplication sInstance;
     private static String tag = "traineeapp";
     private RequestQueue mRequestQueue;
-
+    
     @Override
     public void onCreate() {
         super.onCreate();
@@ -54,11 +54,13 @@ public class MyApplication extends Application {
         }
         return mRequestQueue;
     }
+
     public <T> void add(Request<T> req, String tag) {
         // set the default tag if tag is empty
         req.setTag(TextUtils.isEmpty(tag) ? tag : tag);
         getRequestQueue().add(req);
     }
+
     public <T> void add(Request<T> req) {
         req.setTag(tag);
         getRequestQueue().add(req);

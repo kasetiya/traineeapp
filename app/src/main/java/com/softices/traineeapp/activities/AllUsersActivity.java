@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.adapter.UserAdapter;
-import com.softices.traineeapp.database.DatabaseHelper;
 import com.softices.traineeapp.database.DatabaseManager;
 import com.softices.traineeapp.models.UserModel;
 import com.softices.traineeapp.sharedPreferences.AppPref;
