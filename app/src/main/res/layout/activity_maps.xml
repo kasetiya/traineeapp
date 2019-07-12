@@ -1,44 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.softices.traineeapp.activities.MapsActivity">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:elevation="0dp"
-            app:theme="@style/AppThemeNoActionbar" />
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/small_padding"
-            android:text="Map"
-            android:textColor="@color/myWhite"
-            android:textSize="@dimen/txt_larger"
-            android:textStyle="bold" />
-
-    </FrameLayout>
-
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.softices.traineeapp.activities.MapsActivity">
-
-    </fragment>
-</LinearLayout>
+    android:layout_height="match_parent" />
