@@ -7,9 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +26,8 @@ public class DialogBoxActivity extends AppCompatActivity {
         init();
     }
 
-    /** \
+    /**
+     * \
      * Initializes all views.
      */
     private void init() {
@@ -36,13 +35,14 @@ public class DialogBoxActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
         tvTime = findViewById(R.id.tv_time);
         tvDate = findViewById(R.id.tv_date);
     }
 
-    /** \
+    /**
+     * \
      * Invokes when show dialogue button is clicked.
+     *
      * @param v
      */
     public void alertDialog(View v) {
@@ -75,8 +75,10 @@ public class DialogBoxActivity extends AppCompatActivity {
     }
 
 
-    /** \
+    /**
+     * \
      * Opens DatePicker on button clicked.
+     *
      * @param v
      */
     public void date(View v) {
@@ -90,8 +92,10 @@ public class DialogBoxActivity extends AppCompatActivity {
         dpd.show();
     }
 
-    /** \
+    /**
+     * \
      * Opens TimePicker when button clicked.
+     *
      * @param v
      */
     public void time(View v) {
@@ -111,8 +115,10 @@ public class DialogBoxActivity extends AppCompatActivity {
         tpd.show();
     }
 
-    /** \
+    /**
+     * \
      * This method functions when clicked on toolbar items
+     *
      * @param item
      * @return
      */

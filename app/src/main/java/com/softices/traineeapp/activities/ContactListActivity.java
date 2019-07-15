@@ -44,7 +44,6 @@ public class ContactListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
         listview = findViewById(R.id.list_contact);
         checkPermission();
     }
@@ -70,8 +69,10 @@ public class ContactListActivity extends AppCompatActivity {
         }
     }
 
-    /** \
+    /**
+     * \
      * Request for permission
+     *
      * @param requestCode
      * @param permissions
      * @param grantResults
@@ -90,8 +91,10 @@ public class ContactListActivity extends AppCompatActivity {
         }
     }
 
-    /** \
+    /**
+     * \
      * Request for contacts permission
+     *
      * @param grantResults
      */
     private void goWithContacsPermission(int[] grantResults) {
@@ -123,8 +126,10 @@ public class ContactListActivity extends AppCompatActivity {
         phones.close();
     }
 
-    /** \
+    /**
+     * \
      * This method functions when clicked on toolbar items
+     *
      * @param menuItem
      * @return
      */

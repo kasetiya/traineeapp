@@ -44,37 +44,23 @@ public class DashboardActivity extends AppCompatActivity implements
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         dbManager = new DatabaseManager(this);
         model = new UserModel();
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        String currentMail = AppPref.getUserEmail(DashboardActivity.this);
         tvWelcome = findViewById(R.id.tv_welcome);
-        model = dbManager.getUserDataByEmail(currentMail);
-        tvWelcome.setText("Welcome " + model.getFirstName());
-
-        // fetching & displaying as profile name.
         View view = navigationView.getHeaderView(0);
         tvProfileName = view.findViewById(R.id.tv_name);
-
-        view = navigationView.getHeaderView(0);
         tvDetail = view.findViewById(R.id.tv_detail);
         tvDetail.setOnClickListener(v -> {
-            intent = new Intent(getApplicationContext(), ProfileActivity.class);
+            intent = new Intent(getApplicationContext(), EditProfileActivity.class);
             startActivity(intent);
         });
-
-        // fetching & displaying as profile image.
-        view = navigationView.getHeaderView(0);
         ivProfile = view.findViewById(R.id.imageView);
     }
 
@@ -83,6 +69,7 @@ public class DashboardActivity extends AppCompatActivity implements
         model = dbManager.getUserDataByEmail(currentMail);
         ivProfile.setImageBitmap(model.getPhoto());
         tvProfileName.setText(model.getFirstName());
+        tvWelcome.setText("Welcome " + model.getFirstName());
     }
 
     @Override
@@ -132,7 +119,7 @@ public class DashboardActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            intent = new Intent(DashboardActivity.this, ProfileActivity.class);
+            intent = new Intent(DashboardActivity.this, EditProfileActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_users) {
             intent = new Intent(DashboardActivity.this, AllUsersActivity.class);

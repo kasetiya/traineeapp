@@ -1,95 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/tv_mail_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:text="@string/txt_email_address"
+        android:textAllCaps="true" />
+
+    <EditText
+        android:id="@+id/edt_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_mail_label"
+        android:hint="example@gmail.com"
+        android:inputType="textEmailAddress"
+        android:textSize="@dimen/txt_large" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:elevation="0dp"
-            app:theme="@style/AppThemeNoActionbar" />
 
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/small_padding"
-            android:text="@string/txt_sign_in"
-            android:textColor="@color/myWhite"
-            android:textSize="@dimen/txt_larger"
-            android:textStyle="bold" />
-    </FrameLayout>
+    <TextView
+        android:id="@+id/tv_password_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_email"
+        android:layout_marginTop="@dimen/small_medium_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:text="@string/txt_password"
+        android:textAllCaps="true" />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/edt_password"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_password_label"
+        android:layout_marginBottom="@dimen/small_medium_margin"
+        android:hint="********"
+        android:inputType="textPassword"
+        android:textSize="@dimen/txt_large" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:text="@string/txt_email_address"
-            android:textAllCaps="true" />
-
-        <EditText
-            android:id="@+id/edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="example@gmail.com"
-            android:inputType="textEmailAddress"
-            android:textSize="@dimen/txt_large" />
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_password"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/small_medium_margin"
+        android:background="@color/colorPrimary"
+        android:text="@string/txt_login"
+        android:textColor="@color/myWhite" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_medium_margin"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:text="@string/txt_password"
-            android:textAllCaps="true" />
+    <TextView
+        android:id="@+id/tv_link_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_marginBottom="@dimen/small_medium_margin"
+        android:gravity="center"
+        android:text="@string/txt_create_new_account"
+        android:textSize="@dimen/txt_larger" />
 
-        <EditText
-            android:id="@+id/edt_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/small_medium_margin"
-            android:hint="********"
-            android:inputType="textPassword"
-            android:textSize="@dimen/txt_large" />
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/small_medium_margin"
-            android:background="@color/colorPrimary"
-            android:text="@string/txt_login"
-            android:textColor="@color/myWhite" />
-
-
-        <TextView
-            android:id="@+id/tv_link_signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/small_medium_margin"
-            android:gravity="center"
-            android:text="@string/txt_create_new_account"
-            android:textSize="@dimen/txt_larger" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

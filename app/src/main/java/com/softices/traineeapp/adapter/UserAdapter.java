@@ -1,7 +1,6 @@
 package com.softices.traineeapp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.softices.traineeapp.R;
-import com.softices.traineeapp.activities.ProfileActivity;
 import com.softices.traineeapp.database.DatabaseManager;
 import com.softices.traineeapp.models.UserModel;
 import com.softices.traineeapp.sharedPreferences.AppPref;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

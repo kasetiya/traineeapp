@@ -1,7 +1,6 @@
 package com.softices.traineeapp.activities;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -57,14 +55,7 @@ public class SignupActivity extends AppCompatActivity {
      * Initializing all views.
      */
     private void init() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-
         dbManager = new DatabaseManager(this);
-
         edtFirstName = findViewById(R.id.edt_first_name);
         edtLastName = findViewById(R.id.edt_last_name);
         edtEmail = findViewById(R.id.edt_email);
@@ -72,12 +63,6 @@ public class SignupActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edt_password);
         edtConPassword = findViewById(R.id.edt_conf_password);
         ivPhoto = findViewById(R.id.iv_photo);
-        edtFirstName.setText("Softices");
-        edtLastName.setText("softices");
-        edtEmail.setText("softices@gmail.com");
-        edtMobile.setText("1234567890");
-        edtPassword.setText("12345678");
-        edtConPassword.setText("12345678");
     }
 
     /**
@@ -242,7 +227,7 @@ public class SignupActivity extends AppCompatActivity {
             } else if (!L.isPasswordMatch(mPassword, mConPassword)) {
                 Toast.makeText(this, getString(R.string.txt_password_mismatch), Toast.LENGTH_SHORT).show();
                 edtConPassword.setFocusable(true);
-            } else if (!dbManager.isEmailExist(mEmail)){
+            } else if (!dbManager.isEmailExist(mEmail)) {
                 UserModel userModel = new UserModel();
                 userModel.setFirstName(mFirstName);
                 userModel.setLastName(mLastName);

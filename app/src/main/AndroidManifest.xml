@@ -64,11 +64,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity
-            android:name=".activities.ProfileActivity"
-            android:label=""
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
-        <activity
             android:name=".activities.AllUsersActivity"
             android:label=""
             android:screenOrientation="portrait"

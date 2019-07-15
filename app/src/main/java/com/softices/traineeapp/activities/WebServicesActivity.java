@@ -18,7 +18,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.application.MyApplication;
-import com.softices.traineeapp.constants.JsonKeys;
 import com.softices.traineeapp.sharedPreferences.SessionManager;
 
 import org.json.JSONException;
@@ -36,7 +35,6 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
     private LinearLayout postLayout, patchLayout, deleteLayout;
     private SessionManager session;
     private String TAG = "WebServicesActivity", jsonResponse, tagJsonObj = "json_obj_req";
-    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,6 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
 
         session = new SessionManager(this);
         btnGet = findViewById(R.id.btn_get);
@@ -157,7 +154,7 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
                 response -> {
                     Log.e(TAG, response.toString());
                     try {
-                        String data = response.getString(JsonKeys.jsData);
+                        String data = response.getString("data");
                         Log.e("onResponse: in try", data);
                     } catch (JSONException e) {
                         Log.e("in catch", e.toString());
@@ -169,7 +166,7 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
             public Map<String, String> getHeaders() {
                 String token = session.getToken();
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(JsonKeys.jsAccessToken, token);
+                params.put("Access-Token", token);
                 return params;
             }
         };
@@ -194,7 +191,7 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         }
         JSONObject jsonComment = new JSONObject();
         try {
-            jsonComment.put(JsonKeys.jsComment, jsonText);
+            jsonComment.put("comment", jsonText);
             Log.e("in try", jsonComment.toString());
         } catch (JSONException e) {
             Log.e("in catch", e.toString());
@@ -205,7 +202,7 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
                 response -> {
                     Log.e(TAG, response.toString());
                     try {
-                        String data = response.getString(JsonKeys.jsData);
+                        String data = response.getString("data");
                         Log.e("onResponse: in try", data);
                     } catch (JSONException e) {
                         Log.e("in catch", e.toString());
@@ -218,7 +215,7 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
             public Map<String, String> getHeaders() {
                 String token = session.getToken();
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(JsonKeys.jsAccessToken, token);
+                params.put("Access-Token", token);
                 return params;
             }
         };
@@ -257,9 +254,9 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
                 response -> {
                     Log.e(TAG, response.toString());
                     try {
-                        JSONObject data = response.getJSONObject(JsonKeys.jsData);
-                        String token = data.getString(JsonKeys.jsToken);
-                        String id = data.getString(JsonKeys.jsId);
+                        JSONObject data = response.getJSONObject("data");
+                        String token = data.getString("token");
+                        String id = data.getString("id");
                         session.createIdSession(id, true);
                         session.createTokenSession(token, true);
                         tvResponse.setText("TOKEN: " + token);
@@ -275,8 +272,8 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(JsonKeys.jsMail, mail);
-                params.put(JsonKeys.jsPassword, pass);
+                params.put("mail", mail);
+                params.put("password", pass);
                 return params;
             }
 
@@ -294,15 +291,15 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
                 response -> {
                     Log.e(TAG, response.toString());
                     try {
-                        String name = response.getString(JsonKeys.jsName);
-                        String mail = response.getString(JsonKeys.jsMail);
-                        JSONObject phone = response.getJSONObject(JsonKeys.jsPhone);
-                        String home = phone.getString(JsonKeys.jsHome);
-                        String mobile = phone.getString(JsonKeys.jsMobile);
+                        String name = response.getString("name");
+                        String mail = response.getString("email");
+                        JSONObject phone = response.getJSONObject("phone");
+                        String home = phone.getString("home");
+                        String mobile = phone.getString("mobile");
 
                         jsonResponse = "";
                         jsonResponse += "Name: " + name + "\n";
-                        jsonResponse += "E-mail: " + mail + "\n";
+                        jsonResponse += "Mail: " + mail + "\n";
                         jsonResponse += "Phone: \n";
                         jsonResponse += "   Home: " + home + "\n";
                         jsonResponse += "   Mobile: " + mobile + "\n";
@@ -314,10 +311,10 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
                                 Toast.LENGTH_LONG).show();
                     }
                 }, error -> {
-                    VolleyLog.e(TAG, "Error: " + error.getMessage());
-                    Toast.makeText(getApplicationContext(),
-                            error.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+            VolleyLog.e(TAG, "Error: " + error.getMessage());
+            Toast.makeText(getApplicationContext(),
+                    error.getMessage(), Toast.LENGTH_SHORT).show();
+        });
         MyApplication.getsInstance().add(req);
     }
 

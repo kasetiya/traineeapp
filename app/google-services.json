@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "781271407124",
+    "firebase_url": "https://java-trainee-app.firebaseio.com",
+    "project_id": "java-trainee-app",
+    "storage_bucket": "java-trainee-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781271407124:android:7eefd053f70b4dce",
+        "android_client_info": {
+          "package_name": "com.softices.traineeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781271407124-ckgg11gir5jbb0ra0tf180gq40gel4c0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMc3r7T3PIoMcKpHNAv4GDgrSoWn0-aYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781271407124-ckgg11gir5jbb0ra0tf180gq40gel4c0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

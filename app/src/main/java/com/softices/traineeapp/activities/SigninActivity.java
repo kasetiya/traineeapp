@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.database.DatabaseManager;
@@ -36,24 +35,11 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
      * Initializing all views.
      */
     private void init() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-
         dbManager = new DatabaseManager(this);
-
         edtEmail = findViewById(R.id.edt_email);
-        edtPassword = (EditText) findViewById(R.id.edt_password);
-        edtEmail.setText("softices@gmail.com");
-        edtPassword.setText("12345678");
-
-        tvSignup = findViewById(R.id.tv_link_signup);
-        tvSignup.setOnClickListener(this);
-
-        btnLogin = findViewById(R.id.btn_login);
-        btnLogin.setOnClickListener(this);
+        edtPassword = findViewById(R.id.edt_password);
+        findViewById(R.id.tv_link_signup).setOnClickListener(this);
+        findViewById(R.id.btn_login).setOnClickListener(this);
     }
 
     @Override
@@ -87,7 +73,6 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
             if (valid) {
                 i = new Intent(this, DashboardActivity.class);
                 startActivity(i);
-
                 AppPref.setUserEmail(SigninActivity.this, edtEmail.getText().toString());
                 AppPref.setIsUserLogin(SigninActivity.this, true);
                 finish();
