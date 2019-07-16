@@ -24,7 +24,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     //-------------table User
     public static final String TABLE_USER_TABLE = "user_table";
-    public static final String TABLE_USER_COLUMN_ID = "user_id";
     public static final String TABLE_USER_COLUMN_FIRSTNAME = "user_first_name";
     public static final String TABLE_USER_COLUMN_LASTNAME = "user_last_name";
     public static final String TABLE_USER_COLUMN_EMAIL = "user_email";
@@ -34,8 +33,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     private String USER_TABLE = "CREATE TABLE "
             + TABLE_USER_TABLE + "("
-            + TABLE_USER_COLUMN_ID + " INTEGER PRIMARY KEY,"
-            + TABLE_USER_COLUMN_EMAIL + " TEXT,"
+            + TABLE_USER_COLUMN_EMAIL + " TEXT PRIMARY KEY,"
             + TABLE_USER_COLUMN_MOBILE + " TEXT,"
             + TABLE_USER_COLUMN_PASSWORD + " TEXT,"
             + TABLE_USER_COLUMN_FIRSTNAME + " TEXT,"
@@ -46,6 +44,25 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public DatabaseManager(Context context) {
         super(context, DB_NAME, null, DATABASE_VERSION);
         mDatabase = this.getWritableDatabase();
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        try {
+            db.execSQL(USER_TABLE);
+        } catch (Exception e) {
+            Log.e("onCreate", "" + e);
+        }
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        try {
+            db.execSQL("drop table if exists " + TABLE_USER_TABLE);
+            onCreate(db);
+        } catch (Exception e) {
+            Log.e("onUpgrade", "" + e);
+        }
     }
 
     /**
@@ -228,25 +245,5 @@ public class DatabaseManager extends SQLiteOpenHelper {
         mDatabase.delete(TABLE_USER_TABLE, TABLE_USER_COLUMN_EMAIL + " = ?",
                 new String[]{String.valueOf(mail)});
         mDatabase.close();
-    }
-
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        try {
-            db.execSQL(USER_TABLE);
-        } catch (Exception e) {
-            Log.e("onCreate", "" + e);
-        }
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        try {
-            db.execSQL("drop table if exists " + TABLE_USER_TABLE);
-            onCreate(db);
-        } catch (Exception e) {
-            Log.e("onUpgrade", "" + e);
-        }
     }
 }

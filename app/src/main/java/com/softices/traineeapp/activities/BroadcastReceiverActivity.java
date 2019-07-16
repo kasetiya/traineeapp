@@ -36,8 +36,6 @@ public class BroadcastReceiverActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-
         tvReceiveStatus = findViewById(R.id.tv_receive_status);
         tvReceive = findViewById(R.id.tv_receive);
         broadcastAction();
@@ -77,7 +75,8 @@ public class BroadcastReceiverActivity extends AppCompatActivity {
         }
     };
 
-    /** \
+    /**
+     * \
      * This method functions when clicked on toolbar items
      *
      * @param item

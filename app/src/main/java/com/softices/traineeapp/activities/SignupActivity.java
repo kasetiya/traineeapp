@@ -23,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.bumptech.glide.Glide;
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.database.DatabaseManager;
 import com.softices.traineeapp.dialogsAndValidations.L;
@@ -181,9 +180,7 @@ public class SignupActivity extends AppCompatActivity {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
                 Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-                Glide.with(this)
-                        .load(out.toByteArray())
-                        .into(ivPhoto);
+                ivPhoto.setImageBitmap(decoded);
             } else {
                 L.t(this, "Unable to select image");
             }

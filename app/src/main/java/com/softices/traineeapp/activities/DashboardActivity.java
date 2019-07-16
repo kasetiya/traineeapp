@@ -36,6 +36,10 @@ public class DashboardActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        init();
+    }
+
+    private void init() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         dbManager = new DatabaseManager(this);
@@ -49,13 +53,19 @@ public class DashboardActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
         tvWelcome = findViewById(R.id.tv_welcome);
         View view = navigationView.getHeaderView(0);
+        ivProfile = view.findViewById(R.id.imageView);
         tvProfileName = view.findViewById(R.id.tv_name);
         tvDetail = view.findViewById(R.id.tv_detail);
         tvDetail.setOnClickListener(v -> {
             intent = new Intent(getApplicationContext(), ProfileActivity.class);
             startActivity(intent);
         });
-        ivProfile = view.findViewById(R.id.imageView);
+    }
+
+    @Override
+    protected void onResume() {
+        setDefaultData();
+        super.onResume();
     }
 
     private void setDefaultData() {
@@ -64,12 +74,6 @@ public class DashboardActivity extends AppCompatActivity implements
         ivProfile.setImageBitmap(model.getPhoto());
         tvProfileName.setText(model.getFirstName());
         tvWelcome.setText("Welcome " + model.getFirstName());
-    }
-
-    @Override
-    protected void onResume() {
-        setDefaultData();
-        super.onResume();
     }
 
     @Override
@@ -122,10 +126,6 @@ public class DashboardActivity extends AppCompatActivity implements
             AppPref.clearAppPref(DashboardActivity.this);
             Toast.makeText(DashboardActivity.this, getString(R.string.txt_logout), Toast.LENGTH_SHORT).show();
             finish();
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         } else if (id == R.id.nav_contact_list) {
             intent = new Intent(DashboardActivity.this, ContactListActivity.class);
             startActivity(intent);

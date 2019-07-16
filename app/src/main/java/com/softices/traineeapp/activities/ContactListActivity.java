@@ -50,7 +50,7 @@ public class ContactListActivity extends AppCompatActivity {
 
     /**
      * \
-     * Checks the runtime permisiion for API > 23.
+     * Checks the runtime permission for API > 23.
      */
     private void checkPermission() {
         if (Build.VERSION.SDK_INT < 23) {
@@ -109,7 +109,7 @@ public class ContactListActivity extends AppCompatActivity {
 
     /**
      * \
-     * Retrives the contact list on phone.
+     * Retrieves the contact list on phone.
      */
     private void retrieveContacts() {
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,

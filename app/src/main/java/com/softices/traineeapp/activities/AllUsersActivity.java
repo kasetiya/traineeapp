@@ -5,7 +5,6 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 public class AllUsersActivity extends AppCompatActivity {
 
     private RecyclerView recyclerUsers;
-    private ArrayList<UserModel> userModelList;
+    private ArrayList<UserModel> userModelList = new ArrayList<>();
     private UserAdapter adapter;
     private DatabaseManager dbManager;
 
@@ -40,21 +39,20 @@ public class AllUsersActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         dbManager = new DatabaseManager(this);
 
-        userModelList = new ArrayList<>();
+        setAllUsersList();
 
+        getUsers();
+    }
+
+    private void setAllUsersList() {
         recyclerUsers = findViewById(R.id.recycler_users);
-        recyclerUsers.setLayoutManager(new LinearLayoutManager(AllUsersActivity.this,
-                LinearLayoutManager.VERTICAL, false));
+        recyclerUsers.setLayoutManager(new LinearLayoutManager(AllUsersActivity.this));
         recyclerUsers.setNestedScrollingEnabled(false);
         recyclerUsers.setHasFixedSize(true);
         adapter = new UserAdapter(userModelList, this);
         recyclerUsers.setAdapter(adapter);
-        recyclerUsers.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL ));
-
-        showUsers();
     }
 
     /**
@@ -62,7 +60,7 @@ public class AllUsersActivity extends AppCompatActivity {
      * Set data in list & set adapter &
      * shows all register users.
      */
-    private void showUsers() {
+    private void getUsers() {
         String mail = AppPref.getUserEmail(AllUsersActivity.this);
         userModelList.addAll(dbManager.getAllUserData(mail));
         adapter = new UserAdapter(userModelList, this);
@@ -73,6 +71,7 @@ public class AllUsersActivity extends AppCompatActivity {
     /**
      * \
      * This method functions when clicked on toolbar items
+     *
      * @param menuItem
      * @return
      */

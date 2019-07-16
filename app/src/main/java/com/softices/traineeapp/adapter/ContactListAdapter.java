@@ -47,7 +47,7 @@ public class ContactListAdapter extends BaseAdapter {
         LayoutInflater layoutInflater;
         if (child == null) {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            child = layoutInflater.inflate(R.layout.listview_layout, null);
+            child = layoutInflater.inflate(R.layout.layout_contact_list, null);
             holder = new Holder();
             holder.txtListName = child.findViewById(R.id.tv_contact_name);
             holder.txtListNumber = child.findViewById(R.id.tv_contact_no);
