@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_margin"
             android:background="@color/colorPrimary"
-            android:text="@string/txt_patch"
+            android:text="@string/txt_put"
             android:textColor="@color/myWhite"
             android:textStyle="bold" />
 
@@ -81,115 +81,6 @@
             android:layout_margin="@dimen/small_margin"
             android:background="@color/colorPrimary"
             android:text="@string/txt_delete"
-            android:textColor="@color/myWhite"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_response"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="@dimen/small_padding"
-        android:text="response"
-        android:textStyle="bold"
-        android:visibility="gone" />
-
-    <!-- POST request layout -->
-    <LinearLayout
-        android:id="@+id/post_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical"
-        android:padding="@dimen/small_padding"
-        android:visibility="gone">
-
-        <EditText
-            android:id="@+id/edt_post_mail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="@string/txt_enter_e_mail" />
-
-        <EditText
-            android:id="@+id/edt_post_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="@string/txt_enter_password"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/btn_post_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/small_margin"
-            android:background="@color/colorPrimary"
-            android:padding="@dimen/small_padding"
-            android:text="@string/txt_post"
-            android:textColor="@color/myWhite"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <!-- PATCH request layout -->
-    <LinearLayout
-        android:id="@+id/patch_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical"
-        android:padding="@dimen/small_padding"
-        android:visibility="gone">
-
-        <EditText
-            android:id="@+id/edt_patch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="@string/txt_enter_comment" />
-
-        <Button
-            android:id="@+id/btn_patch_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/small_margin"
-            android:background="@color/colorPrimary"
-            android:padding="@dimen/small_padding"
-            android:text="@string/txt_patch_request"
-            android:textColor="@color/myWhite"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <!-- DELETE -->
-    <LinearLayout
-        android:id="@+id/delete_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/small_padding"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/tv_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:padding="@dimen/small_padding"
-            android:text="@string/txt_delete"
-            android:textStyle="italic" />
-
-        <Button
-            android:id="@+id/btn_delete_request"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/small_margin"
-            android:background="@color/colorPrimary"
-            android:text="delete ?"
             android:textColor="@color/myWhite"
             android:textStyle="bold" />
     </LinearLayout>

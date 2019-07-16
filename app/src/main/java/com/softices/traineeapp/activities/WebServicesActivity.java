@@ -5,9 +5,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +13,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.application.MyApplication;
-import com.softices.traineeapp.sharedPreferences.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,12 +25,7 @@ import java.util.Map;
 
 public class WebServicesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnGet, btnPost, btnPatch, btnDelete, btnPostService, btnPatchService,
-            btnDeleteService;
-    private TextView tvResponse, tvDelete;
-    private EditText edtMail, edtPass, edtComment;
-    private LinearLayout postLayout, patchLayout, deleteLayout;
-    private SessionManager session;
+    private Button btnGet, btnPost, btnPatch, btnDelete;
     private String TAG = "WebServicesActivity", jsonResponse, tagJsonObj = "json_obj_req";
 
     @Override
@@ -53,7 +45,6 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        session = new SessionManager(this);
         btnGet = findViewById(R.id.btn_get);
         btnGet.setOnClickListener(this);
         btnPost = findViewById(R.id.btn_post);
@@ -62,23 +53,6 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
         btnPatch.setOnClickListener(this);
         btnDelete = findViewById(R.id.btn_delete);
         btnDelete.setOnClickListener(this);
-        tvResponse = findViewById(R.id.tv_response);
-
-        postLayout = findViewById(R.id.post_layout);
-        edtMail = findViewById(R.id.edt_post_mail);
-        edtPass = findViewById(R.id.edt_post_pass);
-        btnPostService = findViewById(R.id.btn_post_service);
-        btnPostService.setOnClickListener(this);
-
-        patchLayout = findViewById(R.id.patch_layout);
-        edtComment = findViewById(R.id.edt_patch);
-        btnPatchService = findViewById(R.id.btn_patch_service);
-        btnPatchService.setOnClickListener(this);
-
-        deleteLayout = findViewById(R.id.delete_layout);
-        tvDelete = findViewById(R.id.tv_delete);
-        btnDeleteService = findViewById(R.id.btn_delete_request);
-        btnDeleteService.setOnClickListener(this);
     }
 
     /**
@@ -91,53 +65,17 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_get:
-                tvResponse.setVisibility(View.VISIBLE);
-                postLayout.setVisibility(View.GONE);
-                patchLayout.setVisibility(View.GONE);
-                deleteLayout.setVisibility(View.GONE);
-                tvDelete.setVisibility(View.GONE);
-                GetResponse();
+                getResponse();
                 break;
             case R.id.btn_post:
-                tvResponse.setVisibility(View.GONE);
-                patchLayout.setVisibility(View.GONE);
-                deleteLayout.setVisibility(View.GONE);
-                tvDelete.setVisibility(View.GONE);
-                postLayout.setVisibility(View.VISIBLE);
+                postService();
                 break;
             case R.id.btn_patch:
-                tvResponse.setVisibility(View.GONE);
-                postLayout.setVisibility(View.GONE);
-                deleteLayout.setVisibility(View.GONE);
-                tvDelete.setVisibility(View.GONE);
-                tvResponse.setVisibility(View.GONE);
-                postLayout.setVisibility(View.GONE);
-                patchLayout.setVisibility(View.VISIBLE);
+                putRequest();
                 break;
             case R.id.btn_delete:
-                tvResponse.setVisibility(View.GONE);
-                postLayout.setVisibility(View.GONE);
-                patchLayout.setVisibility(View.GONE);
-                deleteLayout.setVisibility(View.VISIBLE);
-                tvDelete.setVisibility(View.VISIBLE);
-                tvDelete.setText(session.getId());
+                deleteRequest();
                 break;
-            case R.id.btn_post_service:
-                postLayout.setVisibility(View.GONE);
-                tvResponse.setVisibility(View.VISIBLE);
-                tvResponse.setText("");
-                PostService();
-                break;
-            case R.id.btn_patch_service:
-                patchLayout.setVisibility(View.GONE);
-                PatchRequest();
-            case R.id.btn_delete_request:
-                tvResponse.setVisibility(View.GONE);
-                postLayout.setVisibility(View.GONE);
-                patchLayout.setVisibility(View.GONE);
-                deleteLayout.setVisibility(View.GONE);
-                tvDelete.setVisibility(View.GONE);
-                DeleteRequest();
         }
     }
 
@@ -145,99 +83,54 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
      * \
      * This method is for DeleteService.
      */
-    private void DeleteRequest() {
-        String id = session.getId();
-        String url = "http://stg.instructorhub.com/api/v1/instructor/comments/" + id + ".json";
-
-        JsonObjectRequest deleteReq = new JsonObjectRequest(Request.Method.DELETE,
-                url, null,
-                response -> {
-                    Log.e(TAG, response.toString());
-                    try {
-                        String data = response.getString("data");
-                        Log.e("onResponse: in try", data);
-                    } catch (JSONException e) {
-                        Log.e("in catch", e.toString());
-                    }
-                    Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
-                },
+    private void deleteRequest() {
+        String url = "http://httpbin.org/delete";
+        StringRequest deleteReq = new StringRequest(Request.Method.DELETE,
+                url, response -> {
+            Log.e(TAG, "" + response);
+            Toast.makeText(getApplicationContext(), "Response: " + response, Toast.LENGTH_SHORT).show();
+        },
                 error -> VolleyLog.e(TAG, "Error: " + error.getMessage())) {
-            @Override
-            public Map<String, String> getHeaders() {
-                String token = session.getToken();
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Access-Token", token);
-                return params;
-            }
         };
         MyApplication.getsInstance().add(deleteReq, tagJsonObj);
-
     }
 
     /**
      * \
      * This method is for PatchService.
      */
-    private void PatchRequest() {
-        final String text = edtComment.getText().toString().trim();
-        String id = session.getId();
-        String url = "http://stg.instructorhub.com/api/v1/instructor/comments/" + id + "/edit.json";
-
-        JSONObject jsonText = new JSONObject();
-        try {
-            jsonText.put("text", text);
-        } catch (JSONException e) {
-            Log.e("in catch", e.toString());
-        }
-        JSONObject jsonComment = new JSONObject();
-        try {
-            jsonComment.put("comment", jsonText);
-            Log.e("in try", jsonComment.toString());
-        } catch (JSONException e) {
-            Log.e("in catch", e.toString());
-        }
-
-        JsonObjectRequest patchReq = new JsonObjectRequest(Request.Method.PATCH,
-                url, jsonComment,
+    private void putRequest() {
+        String url = "http://httpbin.org/put";
+        StringRequest putReq = new StringRequest(Request.Method.PATCH,
+                url,
                 response -> {
-                    Log.e(TAG, response.toString());
-                    try {
-                        String data = response.getString("data");
-                        Log.e("onResponse: in try", data);
-                    } catch (JSONException e) {
-                        Log.e("in catch", e.toString());
-                    }
-                    Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, response);
+                    Toast.makeText(getApplicationContext(), "Response: " + response, Toast.LENGTH_SHORT).show();
                 },
                 error -> VolleyLog.e(TAG, "Error: " + error.getMessage())
         ) {
             @Override
             public Map<String, String> getHeaders() {
-                String token = session.getToken();
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Access-Token", token);
+                params.put("name", "Alif");
+                params.put("domain", "http://itsalif.info");
                 return params;
             }
         };
-        MyApplication.getsInstance().add(patchReq, tagJsonObj);
-
+        MyApplication.getsInstance().add(putReq, tagJsonObj);
     }
 
     /**
      * \
-     * This method is for PostService.
+     * This method is for postService.
      */
-    private void PostService() {
-        final String mail = edtMail.getText().toString().trim();
-        final String pass = edtPass.getText().toString().trim();
-
+    private void postService() {
         //Change with your url.
-        String urlSignIn = "http://stg.instructorhub.com/api/v1/instructor/signin.json";
-
+        String urlSignIn = "https://api.androidhive.info/volley/person_object.json";
         JSONObject detail = new JSONObject();
         try {
-            detail.put("email", mail);
-            detail.put("password", pass);
+            detail.put("email", "softices@gmail.com");
+            detail.put("password", "123123");
         } catch (JSONException e) {
             Log.e("in catch", e.toString());
         }
@@ -253,18 +146,6 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
                 urlSignIn, jsonObj,
                 response -> {
                     Log.e(TAG, response.toString());
-                    try {
-                        JSONObject data = response.getJSONObject("data");
-                        String token = data.getString("token");
-                        String id = data.getString("id");
-                        session.createIdSession(id, true);
-                        session.createTokenSession(token, true);
-                        tvResponse.setText("TOKEN: " + token);
-                        Log.e("in try", token);
-
-                    } catch (JSONException e) {
-                        Log.e("in catch", e.toString());
-                    }
                     Toast.makeText(getApplicationContext(), "Response: "
                             + response.toString(), Toast.LENGTH_SHORT).show();
                 }, error -> VolleyLog.e(TAG, "Error: " + error.getMessage())) {
@@ -272,8 +153,8 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("mail", mail);
-                params.put("password", pass);
+                params.put("mail", "softices@gmail.com");
+                params.put("password", "123123");
                 return params;
             }
 
@@ -285,29 +166,17 @@ public class WebServicesActivity extends AppCompatActivity implements View.OnCli
      * \
      * This method is for GetService.
      */
-    private void GetResponse() {
+    private void getResponse() {
         String urlJsonObj = "https://api.androidhive.info/volley/person_object.json";
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, urlJsonObj, null,
                 response -> {
                     Log.e(TAG, response.toString());
                     try {
-                        String name = response.getString("name");
-                        String mail = response.getString("email");
-                        JSONObject phone = response.getJSONObject("phone");
-                        String home = phone.getString("home");
-                        String mobile = phone.getString("mobile");
+                        Toast.makeText(getApplicationContext(), "Response: " + response,
+                                Toast.LENGTH_LONG).show();
 
-                        jsonResponse = "";
-                        jsonResponse += "Name: " + name + "\n";
-                        jsonResponse += "Mail: " + mail + "\n";
-                        jsonResponse += "Phone: \n";
-                        jsonResponse += "   Home: " + home + "\n";
-                        jsonResponse += "   Mobile: " + mobile + "\n";
-                        tvResponse.setText(jsonResponse);
-
-                    } catch (JSONException e) {
-                        Toast.makeText(getApplicationContext(),
-                                "Error: " + e.getMessage(),
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
                 }, error -> {

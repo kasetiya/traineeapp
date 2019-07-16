@@ -17,14 +17,14 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        callSigninActivity();
+        handleRedirction();
     }
 
     /**
      * Redirect to SignIn activity after 3000 ms,
      * if user is already logged in then redirect to Dashboard activity.
      */
-    private void callSigninActivity() {
+    private void handleRedirction() {
         Thread timerThread = new Thread() {
             public void run() {
                 try {

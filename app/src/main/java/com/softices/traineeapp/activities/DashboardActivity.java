@@ -2,7 +2,6 @@ package com.softices.traineeapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,18 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.softices.traineeapp.R;
 import com.softices.traineeapp.database.DatabaseManager;
 import com.softices.traineeapp.models.UserModel;
@@ -58,7 +52,7 @@ public class DashboardActivity extends AppCompatActivity implements
         tvProfileName = view.findViewById(R.id.tv_name);
         tvDetail = view.findViewById(R.id.tv_detail);
         tvDetail.setOnClickListener(v -> {
-            intent = new Intent(getApplicationContext(), EditProfileActivity.class);
+            intent = new Intent(getApplicationContext(), ProfileActivity.class);
             startActivity(intent);
         });
         ivProfile = view.findViewById(R.id.imageView);
@@ -119,7 +113,7 @@ public class DashboardActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            intent = new Intent(DashboardActivity.this, EditProfileActivity.class);
+            intent = new Intent(DashboardActivity.this, ProfileActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_users) {
             intent = new Intent(DashboardActivity.this, AllUsersActivity.class);

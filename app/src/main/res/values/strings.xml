@@ -23,7 +23,7 @@
     <string name="txt_confirm_password">Confirm password</string>
     <string name="txt_get">get</string>
     <string name="txt_post">post</string>
-    <string name="txt_patch">patch</string>
+    <string name="txt_put">put</string>
     <string name="txt_enter_e_mail">Enter e-mail</string>
     <string name="txt_enter_password">Enter password</string>
     <string name="txt_enter_comment">Enter Comment</string>
